@@ -1,5 +1,6 @@
 {
     "_hello": "Bonjour",
     "_description": "Simple Exemple I18n",
-    "_new_feature_title": "Titre de la Nouvelle Fonctionnalite"
+    "_new_feature_title": "Titre de la Nouvelle Fonctionnalite",
+    "_testing_pr_from_weblate_to_master": "Test de la PR de Weblate à Master"
 }
