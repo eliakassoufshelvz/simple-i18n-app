@@ -17,7 +17,7 @@ jobs:
 
       - name: Reset weblate branch
         run: |
-          git fetch origin main:main
+          git fetch origin master:master
           git fetch origin weblate:weblate
 
       - name: Create or Update Pull Request
@@ -25,7 +25,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: weblate
-          base: main
+          base: master
           title: "🌐 Translation updates from Weblate"
           body: |
             This PR contains the latest translation updates from Weblate.
