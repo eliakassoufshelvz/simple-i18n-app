@@ -1,4 +1,5 @@
 {
-  "_hello": "Hello",
-  "_description": "Simple I18n Example"
+    "_hello": "Hello",
+    "_description": "Simple I18n Example",
+    "_new_feature_title": "New Feature Title"
 }
