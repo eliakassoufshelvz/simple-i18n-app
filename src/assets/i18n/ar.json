@@ -1,5 +1,6 @@
 {
     "_hello": "مرحباً",
     "_description": "هذا مثال بسيط للترجمة",
-    "_new_feature_title": "عنوان الميزة الجديدة"
+    "_new_feature_title": "عنوان الميزة الجديدة",
+    "_testing_pr_from_weblate_to_master": "اختبار العلاقات العامة من Weblate إلى Master"
 }
