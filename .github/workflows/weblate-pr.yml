@@ -19,7 +19,26 @@ jobs:
           fetch-depth: 0
           ref: weblate
 
+      - name: Fetch master branch
+        run: |
+          git fetch origin master:master
+
+      - name: Check for differences between branches
+        id: check-diff
+        run: |
+          # Compare weblate and master branches
+          if git diff --quiet master...weblate; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ No changes detected between weblate and master branches"
+            echo "This means the branches are already in sync - no PR needed!"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "📝 Changes detected between weblate and master branches"
+            git diff --stat master...weblate
+          fi
+
       - name: Check if PR already exists
+        if: steps.check-diff.outputs.has_changes == 'true'
         id: check-pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,17 +47,18 @@ jobs:
           if [ -n "$PR_NUMBER" ]; then
             echo "pr_exists=true" >> $GITHUB_OUTPUT
             echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
-            echo "PR #$PR_NUMBER already exists"
+            echo "✅ PR #$PR_NUMBER already exists"
           else
             echo "pr_exists=false" >> $GITHUB_OUTPUT
-            echo "No existing PR found"
+            echo "📝 No existing PR found"
           fi
 
       - name: Create Pull Request
-        if: steps.check-pr.outputs.pr_exists == 'false'
+        if: steps.check-diff.outputs.has_changes == 'true' && steps.check-pr.outputs.pr_exists == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "🚀 Creating new PR from weblate to master..."
           gh pr create \
             --base master \
             --head weblate \
@@ -61,10 +81,19 @@ jobs:
             --label "translations,weblate,i18n" \
             --assignee "eliakassoufshelvz"
 
+          echo "✅ PR created successfully!"
+
       - name: Update existing PR
-        if: steps.check-pr.outputs.pr_exists == 'true'
+        if: steps.check-diff.outputs.has_changes == 'true' && steps.check-pr.outputs.pr_exists == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "PR already exists and will be automatically updated with the new commits from weblate branch"
-          gh pr view ${{ steps.check-pr.outputs.pr_number }} --json number,title,url --jq '"PR #\(.number): \(.title)\nURL: \(.url)"'
+          echo "✅ PR already exists and will be automatically updated with the new commits from weblate branch"
+          gh pr view ${{ steps.check-pr.outputs.pr_number }} --json number,title,url --jq '"✅ PR #\(.number): \(.title)\n🔗 URL: \(.url)"'
+
+      - name: No changes to PR
+        if: steps.check-diff.outputs.has_changes == 'false'
+        run: |
+          echo "✅ Workflow completed successfully!"
+          echo "ℹ️  No changes between weblate and master branches"
+          echo "ℹ️  The branches are already in sync - no action needed"
