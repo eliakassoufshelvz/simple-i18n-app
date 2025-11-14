@@ -2,5 +2,6 @@
     "_hello": "Hello",
     "_description": "Simple I18n Example",
     "_new_feature_title": "New Feature Title",
-    "_testing_pr_from_weblate_to_master": "Testing PR From Weblate to Master V0"
+    "_testing_pr_from_weblate_to_master": "Testing PR From Weblate to Master V0",
+    "_testing_pr_from_weblate_to_master_docker_v0": "Testing PR From Weblate to Master Docker V0"
 }
