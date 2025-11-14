@@ -4,5 +4,6 @@
     "_new_feature_title": "Titre de la Nouvelle Fonctionnalite",
     "_testing_pr_from_weblate_to_master": "Test de la PR de Weblate à Master V0",
     "_testing_pr_from_weblate_to_master_docker_v0": "Test de la PR de Weblate à Master Docker V0",
-    "_testing_pr_from_weblate_to_master_docker_v1": "Test de la PR de Weblate à Master Docker V1"
+    "_testing_pr_from_weblate_to_master_docker_v1": "Test de la PR de Weblate à Master Docker V1",
+    "_testing_pr_from_weblate_to_master_docker_v2": "Test de la PR de Weblate à Master Docker V3"
 }
