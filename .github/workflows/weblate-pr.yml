@@ -29,11 +29,11 @@ jobs:
           # Compare weblate and master branches
           if git diff --quiet master...weblate; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "✅ No changes detected between weblate and master branches"
-            echo "This means the branches are already in sync - no PR needed!"
+            echo "✅ No changes detected between weblate and master branches."
+            echo "This means the branches are already in sync - no PR needed."
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "📝 Changes detected between weblate and master branches"
+            echo "📝 Changes detected between weblate and master branches."
             git diff --stat master...weblate
           fi
 
@@ -50,7 +50,7 @@ jobs:
             echo "✅ PR #$PR_NUMBER already exists"
           else
             echo "pr_exists=false" >> $GITHUB_OUTPUT
-            echo "📝 No existing PR found"
+            echo "📝 No Existing PR Found!"
           fi
 
       - name: Create Pull Request
@@ -81,19 +81,18 @@ jobs:
             --label "translations,weblate,i18n" \
             --assignee "eliakassoufshelvz"
 
-          echo "✅ PR created successfully!"
+          echo "✅ PR Created Successfully!"
 
       - name: Update existing PR
         if: steps.check-diff.outputs.has_changes == 'true' && steps.check-pr.outputs.pr_exists == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "✅ PR already exists and will be automatically updated with the new commits from weblate branch"
+          echo "✅ PR already exists and will be automatically updated with the new commits from weblate branch."
           gh pr view ${{ steps.check-pr.outputs.pr_number }} --json number,title,url --jq '"✅ PR #\(.number): \(.title)\n🔗 URL: \(.url)"'
 
       - name: No changes to PR
         if: steps.check-diff.outputs.has_changes == 'false'
         run: |
-          echo "✅ Workflow completed successfully!"
-          echo "ℹ️  No changes between weblate and master branches"
-          echo "ℹ️  The branches are already in sync - no action needed"
+          echo "✅ Workflow Completed Successfully!"
+          echo "ℹ️ The branches are already in sync - no action needed."
