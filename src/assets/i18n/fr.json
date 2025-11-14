@@ -2,5 +2,6 @@
     "_hello": "Bonjour",
     "_description": "Exemple I18n",
     "_new_feature_title": "Titre Nouvelle Fonctionnalite",
-    "_testing_pr_from_weblate_to_master": "Test de la PR de Weblate à Master"
+    "_testing_pr_from_weblate_to_master": "Test de la PR de Weblate à Master",
+    "_testing_another_pr_from_weblate_to_master": "Test d'une autre PR de Weblate à Master"
 }
