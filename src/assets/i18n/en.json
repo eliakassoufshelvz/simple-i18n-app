@@ -3,5 +3,6 @@
     "_description": "I18n Example",
     "_new_feature_title": "New Feature Title",
     "_testing_pr_from_weblate_to_master": "Testing PR From Weblate to Master",
-    "_testing_another_pr_from_weblate_to_master": "Testing Another PR from Weblate to Master"
+    "_testing_another_pr_from_weblate_to_master": "Testing Another PR from Weblate to Master",
+    "_test": "Test"
 }
